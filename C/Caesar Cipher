@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int i = 0, length = 0, temp = 0, temp1 = 0, k = 0, z = 0;
+    //Length of string
+    scanf("%d",&length);
+    
+    char string[length+1];
+    
+    //Input of Plain Text
+    scanf("%s",string);
+    string[strlen(string)] = '\0';
+    
+    //Input of Constant
+    scanf("%d", &k);
+    
+    if(k > 26){
+        z = k / 26;
+        k = k - (26 * z);
+    }
+    
+    //Encrypting the Plain Text
+    for(i = 0; i < length; i++){
+        temp1 = string[i];
+        temp = temp1 + k;
+        
+        if(((temp >= (65+k) && temp <= (90+k)) || (temp >= (97+k) && temp <= (122+k)))){
+            if(temp > 90 && temp1 <=90){
+                temp = temp - 90;
+                
+                if(temp == 1){
+                    temp = 65;
+                }
+                else{
+                    temp = 65+temp-1;
+                }
+                string[i] = temp;
+            }
+            else if(temp > 122 && temp1 <=122){
+                temp = temp - 122;
+               
+                if(temp == 1){
+                    temp = 97;
+                }
+                else{
+                    temp = 97+temp-1;
+                }
+                
+                string[i] = temp;
+            }
+            else{
+                string[i] = temp;
+            }
+        }
+    }
+    
+    //Printing the Cipher Text
+    printf("%s\n",string);
+    
+    return 0;
+}
